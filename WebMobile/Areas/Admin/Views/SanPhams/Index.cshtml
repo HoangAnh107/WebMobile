@@ -1,0 +1,134 @@
+﻿@model PagedList.IPagedList<WebMobile.Models.SanPham>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Danh sách sản phẩm</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div style="display: flex; column-gap: 3px; justify-content: space-between;">
+                <p>
+                    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
+                </p>
+
+                @using (Html.BeginForm())
+                {
+                    <div>
+                        @Html.TextBox("search", ViewBag.Search as string, new { @class = "form-control", placeholder = "Tìm kiếm sản phẩm...", style = "display: inline; width: 200px;" })
+                        @*<input class="btn btn-dark" type="submit" value="Tìm kiếm" style="background: black; color: white;" />*@
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                }
+            </div>
+            @if (TempData["AlertMessage"] != null)
+            {
+                <div id="AlertBox" class="alert @TempData["AlertType"] hide" role="alert" style=" position: fixed; top: 9%; right: 2%; width: 300px;">
+                    @TempData["AlertMessage"]
+                </div>
+            }
+            <div style="overflow-x: auto; ">
+                <table border="1" class="table" style="border-collapse: collapse; border-color: gray;">
+                    <tr>
+                        <th>
+                            Tên sản phẩm
+                        </th>
+                        <th>
+                            Nhà sản xuất
+                        </th>
+                        <th>
+                            Loại sản phẩm
+                        </th>
+
+                        @*<th>
+                        Cấu hình
+                    </th>*@
+                        <th>
+                            Hình ảnh
+                        </th>
+                        <th>
+                            Giá bán
+                        </th>
+                        <th>
+                            Số lượng
+                        </th>
+                        <th>
+                            Lượt xem
+                        </th>
+                        <th>
+                            Giảm giá
+                        </th>
+                        <th>
+                            Ghi chú
+                        </th>
+                        <th> Chức năng</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TenSanPham)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NhaSanXuat.TenNhaSanXuat)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LoaiSanPham.TenLoaiSanPham)
+                            </td>
+
+                            @*<td>
+                            @Html.Raw(@item.CauHinh)
+                        </td>*@
+                            <td>
+                                <img src="~/Public/images/@item.Image" alt="@item.Image" width="100" />
+                            </td>
+                            <td>
+                                @String.Format("{0:#,0đ}", item.GiaBan)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SoLuongDaBan)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LuotView)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GiamGia)%
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GhiChu)
+                            </td>
+                            <td align="center">
+                                <div>@Html.ActionLink("Sửa", "Edit", new { id = item.MaSanPham }, new { @class = "btn btn-success btn-sm" })</div>
+                                <div>@Html.ActionLink("Chi tiết", "Details", new { id = item.MaSanPham }, new { @class = "btn btn-warning btn-sm", style = "margin: 10px 0;" })</div>
+                                <div>
+                                    @Html.ActionLink("Xoá", "Delete", new { id = item.MaSanPham }, new { @class = "btn btn-danger btn-sm" })
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-top:10px">
+                <div> Trang @Model.PageNumber / @Model.PageCount</div>
+                <div>@Html.ActionLink("Xuất danh sách sản phẩm", "ExportToExcel")</div>
+            </div>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = @ViewBag.Search }))
+        </div>
+    </div>
+
+</div>
+
+

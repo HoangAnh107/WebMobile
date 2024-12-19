@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Areas/Admin/Public/ckeditor/ckeditor.js"></script>
+    <style>
+        .navbar-brand a {
+            color: #9d9d9d;
+            text-decoration: none;
+            padding-left:10px;
+        }
+        .navbar-brand a:hover {
+            color: #fff; 
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div style="display: flex; align-items:center; justify-content: space-between;">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="navbar-brand">
+                        <div>
+                            @*@Html.ActionLink("Trang chủ", "Index", "Home", new { style = "padding-left: 0;" })*@
+                            <a style="color: #9d9d9d; font-size: 18px; text-decoration: none; padding-left: 0;" href="/Home">Trang chủ</a>
+                            @Html.ActionLink("Sản phẩm", "Index", "SanPhams")
+                            @Html.ActionLink("Nhà sản xuất", "Index", "NhaSanXuats")
+                            @Html.ActionLink("Loại sản phẩm", "Index", "LoaiSanPhams")
+                            @Html.ActionLink("Hoá đơn", "Index", "HoaDons")
+                            @Html.ActionLink("Thống kê", "Index", "ThongKe")
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <a style="color: #e0dddd; font-size: 18px; text-decoration: none;" href="/Accout/Logout">Xin chào @Session["admin"]!</a>
+                    <a style="color: #9d9d9d; font-size: 18px; text-decoration: none; padding-left: 10px"  href="/Accout/Logout">Đăng xuất</a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

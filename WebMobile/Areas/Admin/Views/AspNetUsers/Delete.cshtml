@@ -1,0 +1,27 @@
+﻿@model WebMobile.Models.AspNetUsers
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Xoá tài khoản</h2>
+        </div>
+    </div>
+    <h4>Bạn có chắc muốn xoá tài khoản <b>@Html.DisplayFor(model => model.Email)</b>  không?</h4>
+    <div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        }
+    </div>
+</div>

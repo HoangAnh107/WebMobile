@@ -1,0 +1,78 @@
+﻿@model PagedList.IPagedList<WebMobile.Models.NhapHang>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Nhật ký nhập kho</h2>
+        </div>
+    </div>
+
+    <p>
+        @Html.ActionLink("Nhập kho", "Create", "ChiTietNhapHangs", null, new { @class = "btn btn-primary" })
+    </p>
+    <div style="overflow-x: auto; min-height: 323px ">
+        <table class="table" style="min-width: 1045px;border-collapse: collapse; border-color: gray" border="1">
+            <tr>
+                <th>
+                    Mã hoá đơn
+                </th>
+                <th>
+                    Ngày nhập
+                </th>
+                <th>
+                    Số lượng nhập
+                </th>
+                <th>
+                    Tổng tiền nhập
+                </th>
+                <th>
+                    Người nhập hàng
+                </th>
+                <th style="width: 296px;">
+                    Tên nhà cung cấp
+                </th>
+                <th style="width: 12%;">Chức năng</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaNhapHang)
+                    </td>
+                    <td>
+                        @String.Format("{0:dd/MM/yyyy}", item.NgayNhap)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoLuongNhap)
+                    </td>
+                    <td>
+                        @String.Format("{0:#,0đ}", item.TongTienNhap)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenNhaCungCap)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("Sửa", "Edit", new { id = item.MaNhapHang.Trim() }) |*@
+                        <a class="btn btn-warning btn-sm" href="@Url.Action("Index", "ChiTietNhapHangs", new { maNhapHang = item.MaNhapHang })">Chi tiết</a>
+                        @Html.ActionLink("Xoá", "Delete", new { id = item.MaNhapHang.Trim() }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+        <div style="display:flex; justify-content:space-between; margin-top:10px">
+            <div> Trang @Model.PageNumber / @Model.PageCount</div>
+            @*<div>@Html.ActionLink("Xuất danh sách đơn hàng", "ExportToExcel")</div>*@
+        </div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = @ViewBag.Search }))
+</div>

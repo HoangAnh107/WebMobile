@@ -1,0 +1,73 @@
+﻿@model IEnumerable<WebMobile.Models.ChiTietNhapHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Chi tiết nhập hàng</h2>
+        </div>
+    </div>
+
+    <table class="table">
+        <tr>
+            @*<th>
+                @Html.DisplayNameFor(model => model.MaNhapHang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaSanPham)
+            </th>*@
+            <th style="border: unset">
+                @Html.DisplayNameFor(model => model.TenSanPham)
+            </th>
+            <th style="border: unset">
+                @Html.DisplayNameFor(model => model.SoLuongNhap)
+            </th>
+            <th style="border: unset">
+                @Html.DisplayNameFor(model => model.GiaNhap)
+            </th>
+            <th style="border: unset">
+                @Html.DisplayNameFor(model => model.ThanhTien)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.MaNhapHang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSanPham)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenSanPham)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuongNhap)
+                </td>
+                @if (item.GiaNhap != null)
+                {
+                   <td>
+                       @String.Format("{0:#,0đ}", item.GiaNhap)
+                   </td>
+                }
+                else
+                {
+                    <td>0đ</td>
+                }
+                <td>
+                    @String.Format("{0:#,0đ}", item.ThanhTien)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+    <div>
+        @Html.ActionLink("Quay lại nhật ký", "Index", "NhapHangs", null, new { @class = "btn btn-primary" })
+    </div>
+</div>

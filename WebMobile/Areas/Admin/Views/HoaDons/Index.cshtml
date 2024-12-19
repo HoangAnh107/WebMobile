@@ -1,0 +1,101 @@
+﻿@model PagedList.IPagedList<WebMobile.Models.HoaDon>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout2.cshtml";
+
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Danh sách đơn hàng</h2>
+        </div>
+    </div>
+    <div style="min-height: 360px; overflow-x: auto">
+        <table border="1" class="table" style="border-collapse: collapse; border-color: gray; min-width: 1360px;">
+            <tr>
+                <th>
+                    Mã đơn hàng
+                </th>
+                <th>
+                    Ngày tạo
+                </th>
+                <th>
+                    Người nhận
+                </th>
+                <th>
+                    SĐT
+                </th>
+                <th>
+                    Địa chỉ
+                </th>
+                <th>
+                    CCCD/CMND
+                </th>
+                <th>
+                    Tổng tiền
+                </th>
+                <th>
+                    Hình thức thanh toán
+                </th>
+                <th>
+                    Tình trạng
+                </th>
+                <th>
+                    Trạng thái
+                </th>
+                <th style="width: 172px;">Chức năng</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @String.Format("{0:dd/MM/yyyy}", item.NgayTao)
+                        @*@Html.DisplayFor(modelItem => item.NgayTao)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NguoiNhan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SDT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiaChi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CCCD)
+                    </td>
+                    <td>
+                        @String.Format("{0:#,0đ}", item.TongTien)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HinhThucThanhToan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TinhTrang)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TrangThai)
+                    </td>
+                    <td style="padding-top: 0; padding-bottom: 0;">
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.ID }, new { @class = "btn btn-success btn-sm" })
+                        @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }, new { @class = "btn btn-warning btn-sm", style = "margin: 10px 0;" })
+                        @Html.ActionLink("Xoá", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+</div>
+        <div style="display:flex; justify-content:space-between; margin-top:10px">
+            <div> Trang @Model.PageNumber / @Model.PageCount</div>
+            <div>@Html.ActionLink("Xuất danh sách đơn hàng", "ExportToExcel")</div>
+        </div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page}))
+    </div>

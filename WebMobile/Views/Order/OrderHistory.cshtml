@@ -1,0 +1,102 @@
+﻿@model IEnumerable<WebMobile.Models.HoaDon>
+
+@{
+    ViewBag.Title = "OrderHistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <ul class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+            <li><a href="@Url.Action("Index", "Products")">Sản phẩm</a></li>
+            <li><a href="#">Đơn hàng</a></li>
+        </ul>
+    </div>
+</div>
+@if (Model.Any())
+{
+    if (TempData["AlertMessage"] != null)
+    {
+        <div id="AlertBox" class="alert @TempData["AlertType"] hide" role="alert">
+            @TempData["AlertMessage"]
+        </div>
+    }
+    <h3>Lịch sử đơn hàng</h3>
+    <table class="table">
+        <tr>
+            <th>
+                Mã đơn hàng
+            </th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.NgayTao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NguoiNhan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TongTien)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TinhTrang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HinhThucThanhToan)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.ID
+                </td>
+                <td>
+                    @String.Format("{0:dd/MM/yyyy}", item.NgayTao)
+
+                    @*@Html.DisplayFor(modelItem => item.NgayTao)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NguoiNhan)
+                </td>
+
+                <td>
+                    @String.Format("{0:#,0đ}", item.TongTien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TinhTrang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HinhThucThanhToan)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrangThai)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id=item.ID }) |*@
+                    @Html.ActionLink("Chi tiết", "OrderDetail", new { orderID = item.ID }) |
+                    @Html.ActionLink("Huỷ đơn hàng", "OrderDelete", new { orderID = item.ID })
+                </td>
+            </tr>
+        }
+    </table>
+    if (@ViewBag.error != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.error
+        </div>
+        <br />
+    }
+    <a href="@Url.Action("Index", "Products")" class="btn btn-primary btn-lg">Tiếp tục mua hàng</a>
+}
+else
+{
+    <center>Hiện không có đơn hàng nào.</center>
+}

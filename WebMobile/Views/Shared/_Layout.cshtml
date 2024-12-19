@@ -1,0 +1,246 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Free Bootstrap Themes by Zerotheme dot com - Free Responsive Html5 Templates">
+    <meta name="author" content="https://www.Zerotheme.com">
+
+    <title>Mobile Shop</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="~/Public/css/bootstrap.min.css" type="text/css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/Public/css/style.css">
+    <link href="~/Public/css/style2.css" rel="stylesheet" />
+
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="~/Public/font-awesome/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Public/fonts/font-slider.css" type="text/css">
+
+    <!-- jQuery and Modernizr-->
+    <script src="~/Public/js/jquery-2.1.1.js"></script>
+
+    <!-- Core JavaScript Files -->
+    <script src="~/Public/js/bootstrap.min.js"></script>
+
+    <style>
+
+        footer-website .col-footer ul, .col-footer {
+            color: white;
+        }
+
+        footer-website .list-item a {
+            color: white;
+        }
+
+        .hosting-offer {
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/640c67354247f20fefe54602/1gr876b3c';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+    <!--Top-->
+    <nav id="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6">
+                    <select class="language">
+                        <option value="VietNam" selected>VietNam</option>
+                        <option value="English">English</option>
+
+                    </select>
+                    <select class="currency">
+                        <option value="VND" selected>VND</option>
+                        <option value="USD">USD</option>
+
+                    </select>
+                </div>
+                <div class="col-xs-6">
+                    @if (Session["username"] == null)
+                    {
+                        <ul class="top-link">
+                            <li><a href="/Accout/Login">Đăng nhập</a></li>
+                            <li><a href="/Accout/Signup">Đăng ký</a></li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="top-link">
+                            <li>Xin chào <strong>@Session["username"]</strong></li>
+                            <li><a href="/Accout/Logout">Đăng xuất</a></li>
+                        </ul>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--Header-->
+    <header style="padding:25px 0;" class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <a href="/">
+                    <div id="logo"><img src="~/Public/images/logo.png" /></div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <form class="form-search" action="/Products" autocomplete="off">
+                    <input style=" padding-left: 5px;" type="text" placeholder="Tìm kiếm sản phẩm..." name="search" class="input-medium search-query">
+                    <input name="title" value="Tìm kiếm" hidden />
+                    <button style="vertical-align:top;" type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <div id="cart">
+                    <a class="btn btn-1" href="/Cart/Index">
+                        <span class="glyphicon glyphicon-shopping-cart">
+                        </span>
+                        CART :
+                        @if (@Session["countItem"] != null)
+                        {
+                            <span>@Session["countItem"] ITEM</span>
+                        }
+                        else
+                        {<span>0 ITEM</span>}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--Navigation-->
+    <nav id="menu" class="navbar container">
+        <div class="container">
+            <div class="navbar-header">
+                <span id="heading" class="visible-xs">Categories</span>
+                <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse" style="padding:0">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Trang chủ", "Index", "Home")</li>
+                    <li class="dropdown">
+                        @Html.ActionLink("Sản phẩm", "Index", "Products")
+
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hãng sản xuất</a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-inner">
+                                @*MenuProducer USE PARTIAL VIEW*@
+                                @{Html.RenderAction("MenuProducer", "Partial");}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Loại sản phẩm</a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-inner">
+                                @*MenuProductType USE PARTIAL VIEW*@
+                                @{Html.RenderAction("MenuProductType", "Partial");}
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href=@Url.Action("Contact", "Home")>Liên hệ</a></li>
+                    @if (Session["username"] != null)
+                    {
+                        <li><a href=@Url.Action("OrderHistory", "Order", new {orderID = Session["buyProduct"]})>Đơn hàng</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--//////////////////////////////////////////////////-->
+    <!--///////////////////HomePage///////////////////////-->
+    <!--//////////////////////////////////////////////////-->
+    <div id="page-content" class="home-page">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <div class="wrap-footer footer-website">
+                <div class="row">
+                    <div class="col-md-3 col-footer footer-1">
+                        <img src="~/Public/images/logofooter.png" />
+
+                        <p>
+                            Đây là trang web chuyên cung cấp điện thoại giá rẻ, uy tín, chất lượng cao.
+                        </p>
+                    </div>
+                    <div class="col-md-3 col-footer footer-2 ">
+                        <div class="heading"><h4>Dịch vụ khách hàng</h4></div>
+                        <ul>
+                            <li><a style="color: white;" href="#">Về chúng tôi</a></li>
+                            <li><a style="color: white;" href="#">Chính sách bảo mật</a></li>
+                            <li><a style="color: white;" href="#">Điều khoản và điều kiện</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-footer footer-3">
+                        <div class="heading"><h4>Tài khoản của tôi</h4></div>
+                        <ul class="list-item">
+                            <li><a style="color: white;" href="#">Tài khoản của tôi</a></li>
+                            <li><a style="color: white;" href="#">Nhãn hiệu</a></li>
+                            <li><a style="color: white;" href="#">Đặc biệt</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-footer footer-4">
+                        <div class="heading"><h4>Liên hệ chúng tôi</h4></div>
+                        <ul>
+                            <li><span class="glyphicon glyphicon-home"></span>VietNam, Hanoi University of Industry</li>
+                            <li><span class="glyphicon glyphicon-earphone"></span>+91 8866888111</li>
+                            <li><span class="glyphicon glyphicon-envelope"></span>haui@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pull-right">
+                            <ul>
+                                <li><img src="~/Public/images/visa-curved-32px.png" /></li>
+                                <li><img src="~/Public/images/paypal-curved-32px.png" /></li>
+                                <li><img src="~/Public/images/discover-curved-32px.png" /></li>
+                                <li><img src="~/Public/images/maestro-curved-32px.png" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.getElementById("AlertBox").classList.remove("hide");
+        setTimeout(() => {
+            document.getElementById("AlertBox").classList.add("hide")
+        }, 5000)
+    </script>
+</body>
+</html>

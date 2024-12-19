@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <!-- Carousel -->
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators hidden-xs">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active setHeightImage">
+                    <img src="~/Public/images/banner2.jpg" alt="First slide" style="width:1140px; height:360px;">
+                    <!-- Static Header -->
+                    <div class="header-text hidden-xs">
+                        <div class="col-md-12 text-center">
+                        </div>
+                    </div><!-- /header-text -->
+                </div>
+                <div class="item setHeightImage">
+                    <img src="~/Public/images/banner3.jpg" alt="Second slide" style="width:1140px; height:360px">
+                    <!-- Static Header -->
+                    <div class="header-text hidden-xs">
+                        <div class="col-md-12 text-center">
+                        </div>
+                    </div><!-- /header-text -->
+                </div>
+                <div class="item setHeightImage">
+                    <img src="~/Public/images/banner1.jpg" alt="Third slide" style="width:1140px; height:360px">
+                    <!-- Static Header -->
+                    <div class="header-text hidden-xs">
+                        <div class="col-md-12 text-center">
+                        </div>
+                    </div><!-- /header-text -->
+                </div>
+            </div>
+            <!-- Controls -->
+            <a class="left carousel-control" href="~/Public/#carousel-example-generic" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="~/Public/#carousel-example-generic" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div><!-- /carousel -->
+    </div>
+</div>
+<div class="row">
+    <div class="banner">
+        <div class="col-sm-4">
+            <img src="~/Public/images/sub-banner1.png" />
+        </div>
+        <div class="col-sm-4">
+            <img src="~/Public/images/sub-banner2.png" />
+        </div>
+        <div class="col-sm-4">
+            <img src="~/Public/images/sub-banner3.png" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="heading"><h2>SẢN PHẨM MỚI NHẤT</h2></div>
+        <div class="products">
+
+            @*NEW PRODUCT PARTIAL VIEW*@
+            @{Html.RenderAction("NewProduct", "Partial");}
+            
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="banner">
+        <div class="col-sm-6">
+            <img src="~/Public/images/sub-banner4.jpg" />
+        </div>
+        <div class="col-sm-6">
+            <img src="~/Public/images/sub-banner5.png" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="heading"><h2>SẢN PHẨM ĐẶC BIỆT</h2></div>
+        <div class="products">
+            @*SPECIAL PRODUCT PARTIAL VIEW*@
+            @{Html.RenderAction("SpecialProduct", "Partial", new { NumberOfProducts=4});}
+        </div>
+    </div>
+</div>

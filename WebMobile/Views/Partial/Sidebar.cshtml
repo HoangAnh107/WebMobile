@@ -1,0 +1,65 @@
+﻿<div id="sidebar" class="col-md-4">
+    <div class="widget wid-categories">
+        <div class="heading"><h4>Hãng sản phẩm</h4></div>
+        <div class="content">
+            @{Html.RenderAction("MenuProducer", "Partial");}
+        </div>
+    </div>
+    <div class="widget wid-categories">
+        <div class="heading"><h4>Loại sản phẩm</h4></div>
+        <div class="content">
+            @{Html.RenderAction("MenuProductType", "Partial");}
+        </div>
+        
+
+    </div>
+    <div class="widget wid-categories">
+        <div class="heading"><h4>Sắp xếp theo giá</h4></div>
+        <div class="content">
+            <ul class="list-unstyled">
+                <li><a href="@Url.Action("Index", "Products", new {sorted="price"})">Từ thấp đến cao</a></li>
+                <li><a href="@Url.Action("Index", "Products", new {sorted="desPrice"})">Từ cao xuống thấp</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="widget wid-categories">
+        <div class="heading"><h4>Giảm giá</h4></div>
+        <div class="content">
+            <ul class="list-unstyled">
+                <li><a href="@Url.Action("Index", "Products", new {discountStart=5, discountEnd=10})">5% - 10% (@ViewBag.discount5to10)</a></li>
+                <li><a href="@Url.Action("Index", "Products", new {discountStart=10, discountEnd=15})">10% - 15% (@ViewBag.discount10to15)</a></li>
+                <li><a href="@Url.Action("Index", "Products", new {discountStart=15, discountEnd=20})">15% - 20% (@ViewBag.discount15to20)</a></li>
+                <li><a href="@Url.Action("Index", "Products", new {discountStart=20, discountEnd=100})">> 20% (@ViewBag.discountUpto20)</a></li>
+            </ul>
+        </div>
+    </div>
+    @*<div class="widget wid-product">
+        <div class="heading"><h4>LATEST</h4></div>
+        <div class="content">
+            <div class="product">
+                <a href="~/Public/#"><img src="~/Public/images/galaxy-s4.jpg"/></a>
+                <div class="wrapper">
+                    <h5><a href="~/Public/#">Samsung Galaxy Tab</a></h5>
+                    <div class="price">$122</div>
+                    <div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
+                </div>
+            </div>
+            <div class="product">
+                <a href="~/Public/#"><img src="~/Public/images/galaxy-s4.jpg" /></a>
+                <div class="wrapper">
+                    <h5><a href="~/Public/#">Samsung Galaxy Tab</a></h5>
+                    <div class="price">$122</div>
+                    <div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
+                </div>
+            </div>
+            <div class="product">
+                <a href="~/Public/#"><img src="~/Public/images/Z1.png" /></a>
+                <div class="wrapper">
+                    <h5><a href="~/Public/#">Samsung Galaxy Tab</a></h5>
+                    <div class="price">$122</div>
+                    <div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+</div>
